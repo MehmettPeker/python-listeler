@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Listeler - Etkileşimli E-Kitap</title>
+    <meta name="description"
+        content="Python programlama dilinde listeler konusunu eğlenceli ve etkileşimli bir şekilde öğrenin.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Arka Plan Partikülleri -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Ana Kitap Konteyneri -->
+    <div class="book-container">
+        <div class="book" id="book">
+
+            <!-- KAPAK SAYFASI -->
+            <div class="page cover-page" data-page="0">
+                <div class="page-content">
+                    <div class="cover-decoration top-left"></div>
+                    <div class="cover-decoration top-right"></div>
+                    <div class="cover-decoration bottom-left"></div>
+                    <div class="cover-decoration bottom-right"></div>
+
+                    <div class="cover-header">
+                        <span class="badge">🐍 Python Temelleri</span>
+                    </div>
+
+                    <h1 class="cover-title">
+                        <span class="title-python">Python</span>
+                        <span class="title-lists">LİSTELER</span>
+                        <span class="title-ebook">E-Kitap</span>
+                    </h1>
+
+                    <div class="cover-illustration">
+                        <img src="assets/apartment.png" alt="Liste Apartmanı" class="apartment-img">
+                    </div>
+
+                    <div class="cover-footer">
+                        <button class="start-btn" onclick="nextPage()">
+                            <span>Kitabı Aç</span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <div class="author-info">
+                            <span class="author-label">Hazırlayan</span>
+                            <span class="author-name">Mehmet PEKER</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İÇİNDEKİLER SAYFASI -->
+            <div class="page" data-page="1">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">📖</span>
+                        <h2>İçindekiler</h2>
+                    </div>
+
+                    <div class="toc-container">
+                        <div class="toc-item" onclick="goToPage(2)">
+                            <div class="toc-number">01</div>
+                            <div class="toc-content">
+                                <h3>Liste Nedir?</h3>
+                                <p>Apartman analojisi ile liste kavramı</p>
+                            </div>
+                            <div class="toc-icon">🏢</div>
+                        </div>
+
+                        <div class="toc-item" onclick="goToPage(5)">
+                            <div class="toc-number">02</div>
+                            <div class="toc-content">
+                                <h3>Liste Oluşturma</h3>
+                                <p>Boş ve dolu liste tanımlama</p>
+                            </div>
+                            <div class="toc-icon">🛠️</div>
+                        </div>
+
+                        <div class="toc-item" onclick="goToPage(7)">
+                            <div class="toc-number">03</div>
+                            <div class="toc-content">
+                                <h3>İndeksleme</h3>
+                                <p>Elemanlara erişim yöntemleri</p>
+                            </div>
+                            <div class="toc-icon">🔢</div>
+                        </div>
+
+                        <div class="toc-item" onclick="goToPage(9)">
+                            <div class="toc-number">04</div>
+                            <div class="toc-content">
+                                <h3>Liste Metodları</h3>
+                                <p>append, remove, pop ve daha fazlası</p>
+                            </div>
+                            <div class="toc-icon">⚙️</div>
+                        </div>
+
+                        <div class="toc-item" onclick="goToPage(14)">
+                            <div class="toc-number">05</div>
+                            <div class="toc-content">
+                                <h3>Dilim Alma (Slicing)</h3>
+                                <p>Liste parçalarıyla çalışma</p>
+                            </div>
+                            <div class="toc-icon">✂️</div>
+                        </div>
+
+                        <div class="toc-item" onclick="goToPage(17)">
+                            <div class="toc-number">06</div>
+                            <div class="toc-content">
+                                <h3>Alıştırmalar ve Projeler</h3>
+                                <p>Öğrendiklerini test et!</p>
+                            </div>
+                            <div class="toc-icon">🎯</div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">1</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 1: LİSTE NEDİR? - SAYFA 1 -->
+            <div class="page" data-page="2">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 1</span>
+                        <h2>Liste Apartmanı 🏢</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="intro-text">
+                            <p><strong>Python'da liste</strong>, birden fazla veriyi tek bir değişken içinde tutmamızı
+                                sağlayan veri yapısıdır.</p>
+                            <p>Ancak bunu teknik tanımıyla anlamaya çalışmak yerine, <em>zihnimizde bir model
+                                    oluşturalım.</em></p>
+                        </div>
+
+                        <div class="analogy-box">
+                            <div class="analogy-icon">🏢</div>
+                            <div class="analogy-content">
+                                <h3>Apartman Analojisi</h3>
+                                <p>Bir listeyi, <strong>içinde daireler olan bir apartman</strong> gibi düşünelim.</p>
+                                <p>Bu apartmanın her dairesinde bir kişi (yani bir <em>veri</em>) oturur.</p>
+                                <p>Ve her dairenin bir <strong>kapı numarası</strong> vardır. İşte Python bu kapı
+                                    numaralarına <strong class="highlight">indeks</strong> adını verir.</p>
+                            </div>
+                        </div>
+
+                        <div class="illustration-section">
+                            <div class="apartment-image-container">
+                                <div class="apartment-sign">Liste Apartmanı</div>
+                                <img src="./images/apartment.png" alt="Doğal Liste Apartmanı" class="apartment-img-new">
+                                <div class="floor-labels">
+                                    <span class="floor-label" style="bottom: 12%;">İndeks 0</span>
+                                    <span class="floor-label" style="bottom: 25%;">İndeks 1</span>
+                                    <span class="floor-label" style="bottom: 38%;">İndeks 2</span>
+                                    <span class="floor-label" style="bottom: 51%;">İndeks 3</span>
+                                    <span class="floor-label" style="bottom: 64%;">İndeks 4</span>
+                                </div>
+                            </div>
+
+                            <div class="code-equivalent">
+                                <pre><code class="python">apartman = ["Can", "Zeynep", "Mehmet", "Ayşe", "Ahmet"]
+
+# Kapı numarası = İndeks
+# İndeksler 0'dan başlar!
+
+print(apartman[0])  # Can
+print(apartman[2])  # Mehmet</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="key-points">
+                            <h4>🔑 Önemli Noktalar</h4>
+                            <ul>
+                                <li><strong>Sıralı:</strong> Her elemanın belirli bir yeri (indeksi) var</li>
+                                <li><strong>İndeksli:</strong> İlk eleman indeks 0'da, ikinci eleman indeks 1'de...</li>
+                                <li><strong>Değiştirilebilir:</strong> Dairelere yeni kiracılar taşınabilir!</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">2</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 1: NEDEN LİSTE? - KARŞILAŞTIRMA (SAYFA 3) -->
+            <div class="page" data-page="3">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 1</span>
+                        <h2>Neden Liste Kullanırız? 🤔</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="comparison-section">
+                            <div class="comparison-card bad">
+                                <h4>❌ Liste Olmadan</h4>
+                                <pre><code class="python">asal1 = 2
+asal2 = 3
+asal3 = 5
+asal4 = 7
+asal5 = 11
+# 100 asal sayı için 100 değişken mi?!</code></pre>
+                            </div>
+
+                            <div class="comparison-card good">
+                                <h4>✅ Liste İle</h4>
+                                <pre><code class="python">asal_sayilar = [2, 3, 5, 7, 11, 
+                13, 17, 19, 23]
+# Tek değişkende hepsi!</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="info-note">
+                            <span class="note-icon">💡</span>
+                            <p>Liste kullanarak <strong>birçok veriyi tek bir değişkende</strong> tutabilir ve kolayca
+                                yönetebilirsin!</p>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 1: NEDEN LİSTE? - TREN ANALOJİSİ (SAYFA 4) -->
+            <div class="page" data-page="4">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 1</span>
+                        <h2>Tren Analojisi 🚂</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="analogy-box train">
+                            <div class="analogy-icon">🚂</div>
+                            <div class="analogy-content">
+                                <h3>Günlük Hayattan</h3>
+                                <p>Liste bir <strong>tren</strong> gibidir. Her vagon (eleman) bir sonrakine bağlıdır ve
+                                    tüm tren tek bir isimle çağrılır! Tıpkı fizik deneyi sonuçlarını tek bir listede
+                                    toplamak gibi.</p>
+                            </div>
+                        </div>
+
+                        <div class="train-visual">
+                            <div class="locomotive">🚂</div>
+                            <div class="wagon" data-index="0">2</div>
+                            <div class="wagon" data-index="1">3</div>
+                            <div class="wagon" data-index="2">5</div>
+                            <div class="wagon" data-index="3">7</div>
+                            <div class="wagon" data-index="4">11</div>
+                        </div>
+
+                        <div class="info-note">
+                            <span class="note-icon">🔬</span>
+                            <p><strong>Fen Örneği:</strong> Bir deneyde ölçtüğün 50 farklı sıcaklık değerini tek bir
+                                <code>sicakliklar</code> listesinde tutabilirsin!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">4</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 2: LİSTE OLUŞTURMA - SAYFA 1 -->
+            <div class="page" data-page="5">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 2</span>
+                        <h2>Liste Oluşturma 🛠️</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="method-card">
+                            <div class="method-header">
+                                <span class="method-number">1</span>
+                                <h3>Köşeli Parantez ile</h3>
+                            </div>
+                            <div class="method-body">
+                                <pre><code class="python"># Boş bir liste oluşturma
+bos_liste = []
+
+# Asal sayıları tutan liste
+asal_sayilar = [2, 3, 5, 7, 11, 13]
+
+# Fizik sınav notları
+fizik_notlari = [85, 90, 78, 92, 88]</code></pre>
+                            </div>
+                            <div class="method-note">
+                                <span>📌</span> En yaygın kullanılan yöntem
+                            </div>
+                        </div>
+
+                        <div class="method-card">
+                            <div class="method-header">
+                                <span class="method-number">2</span>
+                                <h3>list() Fonksiyonu ile</h3>
+                            </div>
+                            <div class="method-body">
+                                <pre><code class="python"># Boş bir liste oluşturma
+liste = list()     # []
+
+# Sayı aralığı oluşturma
+liste1 = list(range(1, 5)) # [1, 2, 3, 4]
+
+# Metni listeye çevirme
+yazi = "Python"
+liste2 = list(yazi) # ['P', 'y', 't', 'h', 'o', 'n']</code></pre>
+                            </div>
+                            <div class="method-note">
+                                <span>📌</span> Dönüştürme işlemleri için idealdir
+                            </div>
+                        </div>
+
+                        <div class="method-card">
+                            <div class="method-header">
+                                <span class="method-number">3</span>
+                                <h3>Farklı Veri Tipleri</h3>
+                            </div>
+                            <div class="method-body">
+                                <pre><code class="python"># Bir deneyin verileri
+deney = ["Serbest Düşme", 9.8, 2.5, True]
+
+# deney adı: "Serbest Düşme"
+# yerçekimi (m/s²): 9.8
+# süre (s): 2.5
+# başarılı mı: True</code></pre>
+                            </div>
+                            <div class="method-note">
+                                <span>📌</span> Python listesi esnek yapıdadır
+                            </div>
+                        </div>
+
+                        <div class="interactive-demo">
+                            <h4>🎮 Dene ve Gör!</h4>
+                            <p>Liste uzunluğunu öğrenmek için:</p>
+                            <pre><code class="python">asal_sayilar = [2, 3, 5, 7, 11, 13]
+print(len(asal_sayilar))  # 6</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">5</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 2: LİSTE OLUŞTURMA - SAYFA 2 -->
+            <div class="page" data-page="6">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 2</span>
+                        <h2>Liste Özellikleri 📋</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="features-list-focused">
+                            <div class="feature-item-wide">
+                                <div class="feature-item-header">
+                                    <span class="feature-item-icon">📏</span>
+                                    <h4>Sıralı (Ordered)</h4>
+                                    <p>Elemanlar ekleme sırasını korur</p>
+                                </div>
+                                <div class="feature-item-code">
+                                    <pre><code class="python">notlar = [90, 85, 78]
+# Sıra değişmez: [90, 85, 78]</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="feature-item-wide">
+                                <div class="feature-item-header">
+                                    <span class="feature-item-icon">✏️</span>
+                                    <h4>Değiştirilebilir</h4>
+                                    <p>Elemanlar güncellenebilir</p>
+                                </div>
+                                <div class="feature-item-code">
+                                    <pre><code class="python">isimler = ["Ali", "Veli"]
+isimler[1] = "Mehmet"
+# Sonuç: ["Ali", "Mehmet"]</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="feature-item-wide">
+                                <div class="feature-item-header">
+                                    <span class="feature-item-icon">🔢</span>
+                                    <h4>İndekslenebilir</h4>
+                                    <p>Her elemana indeksle erişim</p>
+                                </div>
+                                <div class="feature-item-code">
+                                    <pre><code class="python">dersler = ["Mat", "Fiz", "Kim"]
+print(dersler[1])  # Fiz</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="feature-item-wide">
+                                <div class="feature-item-header">
+                                    <span class="feature-item-icon">🔄</span>
+                                    <h4>Tekrara İzin Verir</h4>
+                                    <p>Aynı değer birden fazla olabilir</p>
+                                </div>
+                                <div class="feature-item-code">
+                                    <pre><code class="python">notlar = [85, 90, 85, 85, 92]
+# 85 üç kez tekrarlanabilir</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">6</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 3: İNDEKSLEME - SAYFA 1 -->
+            <div class="page" data-page="7">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 3</span>
+                        <h2>İndeksleme 🔢</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="analogy-box bookshelf">
+                            <div class="analogy-icon">📚</div>
+                            <div class="analogy-content">
+                                <h3>Günlük Hayattan</h3>
+                                <p>Bir <strong>kitaplıktaki kitapları</strong> düşün - her kitabın rafta bir sırası var.
+                                    Programlamada bu sıraya <strong>indeks</strong> denir ve <em>0'dan</em> başlar!
+                                    Tıpkı periyodik tabloda elementlerin atom numarasıyla sıralanması gibi.</p>
+                            </div>
+                        </div>
+
+                        <div class="index-visual">
+                            <div class="index-diagram">
+                                <div class="index-row positive">
+                                    <span class="index-label">İndeks:</span>
+                                    <span class="index-num">0</span>
+                                    <span class="index-num">1</span>
+                                    <span class="index-num">2</span>
+                                    <span class="index-num">3</span>
+                                    <span class="index-num">4</span>
+                                </div>
+                                <div class="index-row elements">
+                                    <span class="index-label">Not:</span>
+                                    <span class="element-box">85</span>
+                                    <span class="element-box">90</span>
+                                    <span class="element-box">78</span>
+                                    <span class="element-box">92</span>
+                                    <span class="element-box">88</span>
+                                </div>
+                                <div class="index-row negative">
+                                    <span class="index-label">Negatif:</span>
+                                    <span class="index-num neg">-5</span>
+                                    <span class="index-num neg">-4</span>
+                                    <span class="index-num neg">-3</span>
+                                    <span class="index-num neg">-2</span>
+                                    <span class="index-num neg">-1</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="code-examples">
+                            <div class="example-block">
+                                <h4>Pozitif İndeks</h4>
+                                <pre><code class="python">notlar = [85, 90, 78, 92, 88]
+
+print(notlar[0])  # 85 (ilk not)
+print(notlar[2])  # 78 (3. not)
+print(notlar[4])  # 88 (son not)</code></pre>
+                            </div>
+
+                            <div class="example-block">
+                                <h4>Negatif İndeks</h4>
+                                <pre><code class="python"># Sondan başa doğru sayar
+print(notlar[-1])  # 88 (son)
+print(notlar[-2])  # 92 (sondan 2.)
+print(notlar[-5])  # 85 (ilk)</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="warning-box">
+                            <span class="warning-icon">⚠️</span>
+                            <p><strong>Dikkat!</strong> İndeks 0'dan başlar! İlk elemanın indeksi 0, ikincinin 1, vb.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">7</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 3: İNDEKSLEME - SAYFA 2 -->
+            <div class="page" data-page="8">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 3</span>
+                        <h2>Eleman Değiştirme ✏️</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="analogy-box locker">
+                            <div class="analogy-icon">🗄️</div>
+                            <div class="analogy-content">
+                                <h3>Günlük Hayattan</h3>
+                                <p>Bir <strong>dolaptaki eşyaları</strong> düşün - istediğin gözü açıp içindekini
+                                    değiştirebilirsin. Listede de indeks ile istediğin elemanı bulup güncelleyebilirsin!
+                                    Öğretmen de sınav kağıdını yeniden değerlendirip notu güncelleyebilir.</p>
+                            </div>
+                        </div>
+
+                        <div class="change-demo">
+                            <div class="change-step">
+                                <h4>Önce:</h4>
+                                <div class="step-visual">
+                                    <span class="box">85</span>
+                                    <span class="box">90</span>
+                                    <span class="box keyword text-gray-500 line-through removed-item"
+                                        style="text-decoration: line-through; text-decoration-color: var(--secondary); text-decoration-thickness: 2px; opacity: 1;">78</span>
+                                    <span class="box">92</span>
+                                </div>
+                            </div>
+
+                            <div class="change-arrow">
+                                <span>↓</span>
+                                <code>notlar[2] = 82</code>
+                            </div>
+
+                            <div class="change-step">
+                                <h4>Sonra:</h4>
+                                <div class="step-visual">
+                                    <span class="box">85</span>
+                                    <span class="box">90</span>
+                                    <span class="box highlight changed">82</span>
+                                    <span class="box">92</span>
+                                </div>
+                            </div>
+
+                            <!-- New Explicit Code Block -->
+                            <div class="demo-code-block">
+                                <span class="demo-code-label">Kod:</span>
+                                <span class="demo-code-content">notlar[2] = 82</span>
+                            </div>
+                        </div>
+
+                        <div class="info-note">
+                            <span class="note-icon">💡</span>
+                            <p>Listedeki herhangi bir elemanı değiştirmek için sadece <strong>indeksini</strong>
+                                bilmemiz yeterli. Yeni değeri atadığımızda eski değer kaybolur.</p>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">8</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 4: LİSTE METODLARI - EKLEME -->
+            <div class="page" data-page="9">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 4</span>
+                        <h2>Listeye Eleman Ekleme ➕</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="methods-intro">
+                            <p>Listeye yeni veriler eklemek için bu iki metodu sıkça kullanırız:</p>
+                        </div>
+
+                        <!-- APPEND DEMO -->
+                        <div class="method-demo-box">
+                            <h4>append() - Sona Eleman Ekle</h4>
+                            <div class="visual-change">
+                                <div class="change-step">
+                                    <span class="step-label">Önce:</span>
+                                    <div class="step-visual">
+                                        <span class="box">2</span>
+                                        <span class="box">3</span>
+                                        <span class="box">5</span>
+                                        <span class="box">7</span>
+                                    </div>
+                                </div>
+                                <div class="change-arrow">
+                                    <span>↓</span>
+                                    <code>asal.append(11)</code>
+                                </div>
+                                <div class="change-step">
+                                    <span class="step-label">Sonra:</span>
+                                    <div class="step-visual">
+                                        <span class="box">2</span>
+                                        <span class="box">3</span>
+                                        <span class="box">5</span>
+                                        <span class="box">7</span>
+                                        <span class="box highlight new">11</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="demo-code-block">
+                                <span class="demo-code-label">Kod:</span>
+                                <span class="demo-code-content">asal.append(11)</span>
+                            </div>
+                        </div>
+
+                        <!-- INSERT DEMO -->
+                        <div class="method-demo-box">
+                            <h4>insert() - Belirli Konuma Ekle</h4>
+                            <div class="visual-change">
+                                <div class="change-step">
+                                    <span class="step-label">Önce:</span>
+                                    <div class="step-visual">
+                                        <span class="box">H</span>
+                                        <span class="box insert-target">Li</span>
+                                        <span class="box">Be</span>
+                                    </div>
+                                </div>
+                                <div class="change-arrow">
+                                    <span>↓</span>
+                                    <code>elementler.insert(1, "He")</code>
+                                </div>
+                                <div class="change-step">
+                                    <span class="step-label">Sonra:</span>
+                                    <div class="step-visual">
+                                        <span class="box">H</span>
+                                        <span class="box highlight new">He</span>
+                                        <span class="box">Li</span>
+                                        <span class="box">Be</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="demo-code-block">
+                                <span class="demo-code-label">Kod:</span>
+                                <span class="demo-code-content">elementler.insert(1, "He")</span>
+                            </div>
+                        </div>
+
+                        <div class="info-note">
+                            <span class="note-icon">💡</span>
+                            <p><strong>İpucu:</strong> <code>append()</code> her zaman listenin en sonuna ekler,
+                                <code>insert()</code> ise istediğin sıraya araya kaynak yapar!
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">9</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 4: LİSTE METODLARI - SİLME (SAYFA 9) -->
+            <div class="page" data-page="10">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 4</span>
+                        <h2>Listeden Eleman Silme 🗑️</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="methods-intro">
+                            <p>İstenmeyen verilerden kurtulmak için bu metodları kullanırız:</p>
+                        </div>
+
+                        <!-- REMOVE DEMO -->
+                        <div class="method-demo-box">
+                            <h4>remove() - Değere Göre Sil</h4>
+                            <div class="visual-change">
+                                <div class="change-step">
+                                    <span class="step-label">Önce:</span>
+                                    <div class="step-visual">
+                                        <span class="box">20</span>
+                                        <span class="box highlight removed">999</span>
+                                        <span class="box">22</span>
+                                    </div>
+                                </div>
+                                <div class="change-arrow">
+                                    <span>↓</span>
+                                    <code>sicaklik.remove(999)</code>
+                                </div>
+                                <div class="change-step">
+                                    <span class="step-label">Sonra:</span>
+                                    <div class="step-visual">
+                                        <span class="box">20</span>
+                                        <span class="box">22</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="demo-code-block">
+                                <span class="demo-code-label">Kod:</span>
+                                <span class="demo-code-content">sicaklik.remove(999)</span>
+                            </div>
+                        </div>
+
+                        <!-- POP DEMO -->
+                        <div class="method-demo-box">
+                            <h4>pop() - İndeksten Sil (veya Sondan)</h4>
+                            <div class="visual-change">
+                                <div class="change-step">
+                                    <span class="step-label">Önce:</span>
+                                    <div class="step-visual">
+                                        <span class="box">85</span>
+                                        <span class="box">90</span>
+                                        <span class="box highlight removed">78</span>
+                                    </div>
+                                </div>
+                                <div class="change-arrow">
+                                    <span>↓</span>
+                                    <code>silinen = notlar.pop()</code>
+                                </div>
+                                <div class="change-step">
+                                    <span class="step-label">Sonra:</span>
+                                    <div class="step-visual">
+                                        <span class="box">85</span>
+                                        <span class="box">90</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="demo-code-block">
+                                <span class="demo-code-label">Kod:</span>
+                                <span class="demo-code-content">notlar.pop(2)</span>
+                            </div>
+                        </div>
+
+                        <!-- CLEAR DEMO -->
+                        <div class="method-demo-box">
+                            <h4>clear() - Her Şeyi Temizle</h4>
+                            <pre><code class="python">sepet = ["Elma", "Armut", "Muz"]
+sepet.clear()
+# Sonuç: [] (Boş liste)</code></pre>
+                        </div>
+
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 4: SIRALAMA METODLARI (SAYFA 10) -->
+            <div class="page" data-page="11">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 4</span>
+                        <h2>Sıralama Metodları 📊</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="methods-intro">
+                            <p>Listeleri düzenli tutmak için bu iki süper metodu kullanırız:</p>
+                        </div>
+
+                        <!-- SORT DEMO -->
+                        <div class="method-demo-box">
+                            <h4>🔢 sort() - Küçükten Büyüğe Sırala</h4>
+                            <div class="visual-change">
+                                <div class="change-step">
+                                    <div class="step-visual">
+                                        <span class="box">78</span>
+                                        <span class="box">92</span>
+                                        <span class="box">65</span>
+                                    </div>
+                                </div>
+                                <div class="change-arrow">
+                                    <span>↓</span>
+                                    <code>notlar.sort()</code>
+                                </div>
+                                <div class="change-step">
+                                    <div class="step-visual sorted">
+                                        <span class="box highlight new">65</span>
+                                        <span class="box highlight new">78</span>
+                                        <span class="box highlight new">92</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-note" style="margin-top: 15px; font-size: 0.85rem;">
+                                <span class="note-icon">📝</span>
+                                <p>Sadece sayılar değil, kelimeleri de (alfabetik) sıralar!</p>
+                            </div>
+                        </div>
+
+                        <!-- REVERSE DEMO -->
+                        <div class="method-demo-box">
+                            <h4>🔄 reverse() - Ters Çevir</h4>
+                            <div class="visual-change">
+                                <div class="change-step">
+                                    <div class="step-visual">
+                                        <span class="box">1</span>
+                                        <span class="box">2</span>
+                                        <span class="box">3</span>
+                                    </div>
+                                </div>
+                                <div class="change-arrow">
+                                    <span>↓</span>
+                                    <code>sayilar.reverse()</code>
+                                </div>
+                                <div class="change-step">
+                                    <div class="step-visual">
+                                        <span class="box highlight changed">3</span>
+                                        <span class="box highlight changed">2</span>
+                                        <span class="box highlight changed">1</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">11</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 4: ARAMA VE BİLGİ (SAYFA 11) -->
+            <div class="page" data-page="12">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 4</span>
+                        <h2>Arama ve Bilgi Metodları 🔎</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="analogy-box"
+                            style="margin-bottom: 20px; background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3);">
+                            <div class="analogy-icon">🕵️</div>
+                            <div class="analogy-content">
+                                <h3>Dedektif Gibi İzle</h3>
+                                <p>Listede kaç eleman var? Aradığım şey nerede? Bu soruların cevabı burada!</p>
+                            </div>
+                        </div>
+
+                        <!-- LEN DEMO -->
+                        <div class="method-demo-box">
+                            <h4>📏 len() - Uzunluk Bulma <span class="method-badge info">Fonksiyon</span></h4>
+                            <p style="font-size: 0.9rem; margin-bottom: 10px; color: var(--text-secondary);">Listede kaç
+                                tane eşya (eleman) olduğunu söyler.</p>
+                            <div class="visual-change" style="justify-content: center;">
+                                <div class="step-visual">
+                                    <span class="box">10</span>
+                                    <span class="box">20</span>
+                                    <span class="box">30</span>
+                                </div>
+                            </div>
+                            <div class="demo-code-block">
+                                <span class="demo-code-label">Kod:</span>
+                                <span class="demo-code-content">len(sayilar) <span style="color: var(--text-muted)">→
+                                        3</span></span>
+                            </div>
+                        </div>
+
+                        <!-- COUNT DEMO -->
+                        <div class="method-demo-box">
+                            <h4>🧮 count() - Sayma <span class="method-badge method">Metod</span></h4>
+
+                            <div class="analogy-box"
+                                style="margin: 10px 0; padding: 15px; background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3);">
+                                <div class="analogy-icon" style="font-size: 1.5rem;">👨‍🎓</div>
+                                <div class="analogy-content">
+                                    <h5 style="margin-bottom: 5px; color: var(--secondary-light);">Okul Analojisi</h5>
+                                    <p style="font-size: 0.9rem;">Bir sınıfta yoklama alırken <strong>"Ali isminde kaç
+                                            kişi var?"</strong> diye saydığımızı düşün.</p>
+                                </div>
+                            </div>
+
+                            <p style="font-size: 0.9rem; margin-bottom: 15px; color: var(--text-secondary);">Listede
+                                aradığın elemandan kaç tane olduğunu bulur.</p>
+
+                            <div class="visual-change">
+                                <div class="step-visual">
+                                    <span class="box highlight running-count">Ali</span>
+                                    <span class="box">Ayşe</span>
+                                    <span class="box highlight running-count">Ali</span>
+                                    <span class="box">Can</span>
+                                </div>
+                            </div>
+                            <div class="demo-code-block">
+                                <span class="demo-code-label">Kod:</span>
+                                <span class="demo-code-content">sinif.count("Ali") <span
+                                        style="color: var(--text-muted)">→ 2</span></span>
+                            </div>
+                        </div>
+
+                        <!-- INDEX DEMO -->
+                        <div class="method-demo-box">
+                            <h4>📍 index() - Konum Bulma <span class="method-badge method">Metod</span></h4>
+                            <p style="font-size: 0.9rem; margin-bottom: 10px; color: var(--text-secondary);">Aranan
+                                elemanın kaçıncı sırada (indekste) olduğunu bulur.</p>
+                            <div class="visual-change">
+                                <div class="step-visual">
+                                    <span class="box">"A"</span>
+                                    <span class="box highlight found-index">"B"</span>
+                                    <span class="box">"C"</span>
+                                </div>
+                            </div>
+                            <div class="demo-code-block">
+                                <span class="demo-code-label">Kod:</span>
+                                <span class="demo-code-content">liste.index("B") <span
+                                        style="color: var(--text-muted)">→ 1</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">12</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 4: MATEMATİK VE ARAÇLAR (SAYFA 12) -->
+            <div class="page" data-page="13">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 4</span>
+                        <h2>Fonksiyonlar 🔢</h2>
+                    </div>
+
+                    <div class="content-section">
+
+                        <!-- MIN/MAX/SUM GRID -->
+                        <!-- MIN DEMO -->
+                        <div class="method-demo-box">
+                            <h4>📉 min() - En Küçük <span class="method-badge math">Fonksiyon</span></h4>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 10px;">Listenin en
+                                küçük elemanını bulur.</p>
+                            <div class="visual-change" style="justify-content: center;">
+                                <div class="step-visual">
+                                    <span class="box highlight min-max">1</span>
+                                    <span class="box">5</span>
+                                    <span class="box">9</span>
+                                </div>
+                            </div>
+                            <div class="demo-code-block">
+                                <span class="demo-code-label">Kod:</span>
+                                <span class="demo-code-content">min(sayilar) <span style="color: var(--text-muted)">→
+                                        1</span></span>
+                            </div>
+                        </div>
+
+                        <!-- MAX DEMO -->
+                        <div class="method-demo-box">
+                            <h4>📈 max() - En Büyük <span class="method-badge math">Fonksiyon</span></h4>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 10px;">Listenin en
+                                büyük elemanını bulur.</p>
+                            <div class="visual-change" style="justify-content: center;">
+                                <div class="step-visual">
+                                    <span class="box">1</span>
+                                    <span class="box">5</span>
+                                    <span class="box highlight min-max">9</span>
+                                </div>
+                            </div>
+                            <div class="demo-code-block">
+                                <span class="demo-code-label">Kod:</span>
+                                <span class="demo-code-content">max(sayilar) <span style="color: var(--text-muted)">→
+                                        9</span></span>
+                            </div>
+                        </div>
+
+                        <!-- SUM DEMO -->
+                        <div class="method-demo-box">
+                            <h4>➕ sum() - Toplam <span class="method-badge math">Fonksiyon</span></h4>
+                            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 10px;">Listedeki
+                                tüm sayıları toplar.</p>
+                            <div class="visual-change" style="justify-content: center;">
+                                <div class="step-visual">
+                                    <span class="box highlight sum-group">2</span>
+                                    <span class="box highlight sum-group">3</span>
+                                    <span class="box highlight sum-group">5</span>
+                                </div>
+                            </div>
+                            <div class="demo-code-block">
+                                <span class="demo-code-label">Kod:</span>
+                                <span class="demo-code-content">sum(notlar) <span style="color: var(--text-muted)">→
+                                        10</span></span>
+                            </div>
+                        </div>
+
+                        <div class="info-note">
+                            <span class="note-icon">💡</span>
+                            <p><strong>Not:</strong> <code>len()</code>, <code>min()</code>, <code>max()</code> ve
+                                <code>sum()</code> Python'un yerleşik fonksiyonlarıdır. Metodlardan farklı olarak
+                                <code>fonksiyon(liste)</code> şeklinde kullanılır!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">13</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 5: DİLİM ALMA - GİRİŞ (SAYFA 13) -->
+            <div class="page" data-page="14">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 5</span>
+                        <h2>Dilim Alma (Slicing) ✂️</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <p class="section-intro">
+                            <code>Örnek Liste: elementler = ["H", "He", "Li", "Be", "B"]</code>
+                        </p>
+
+                        <div class="list-visual-container">
+                            <div class="list-visual">
+                                <span class="list-item">H<span class="idx">0</span></span>
+                                <span class="list-item">He<span class="idx">1</span></span>
+                                <span class="list-item">Li<span class="idx">2</span></span>
+                                <span class="list-item">Be<span class="idx">3</span></span>
+                                <span class="list-item">B<span class="idx">4</span></span>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">🍰</div>
+                            <div class="card-content">
+                                <h4>Günlük Hayattan</h4>
+                                <p>Bir pastadan dilim almak gibi düşün - istediğin yerden başla, istediğin yerde bitir.
+                                    Fizik
+                                    deneyinde 10 ölçüm yaptın ama sadece ortadaki 5 ölçümü analiz etmek istiyorsan
+                                    <strong>dilimleme</strong> kullan!
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="slice-syntax">
+                            <div class="syntax-box">
+                                <code>liste[başlangıç : bitiş : adım]</code>
+                            </div>
+                            <div class="syntax-notes">
+                                <span><strong>başlangıç:</strong> Dahil</span>
+                                <span><strong>bitiş:</strong> Dahil değil</span>
+                                <span><strong>adım:</strong> Atlama miktarı</span>
+                            </div>
+                        </div>
+
+                        <div class="slice-demo-section">
+                            <!-- 1. Temel -->
+                            <div class="slice-demo-box">
+                                <div class="slice-code-header">
+                                    <span class="badge" style="font-size: 0.7rem; background: var(--secondary);">1.
+                                        Temel</span>
+                                    <code>elementler[1:4]</code>
+                                    <span class="slice-result">→ ["He", "Li", "Be"]</span>
+                                </div>
+                                <div class="slice-visual-combined">
+                                    <div class="slice-unit"><span class="box">H</span><span class="index">0</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">He</span><span
+                                            class="index selected">1</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">Li</span><span
+                                            class="index selected">2</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">Be</span><span
+                                            class="index selected">3</span></div>
+                                    <div class="slice-unit"><span class="box">B</span><span class="index">4</span></div>
+                                </div>
+                            </div>
+                            <!-- 2. Baştan -->
+                            <div class="slice-demo-box">
+                                <div class="slice-code-header">
+                                    <span class="badge" style="font-size: 0.7rem; background: var(--accent);">2.
+                                        Baştan</span>
+                                    <code>elementler[:3]</code>
+                                    <span class="slice-result">→ ["H", "He", "Li"]</span>
+                                    <p style="font-size: 0.75rem; margin-top: 5px; color: var(--text-muted);">Başlangıç
+                                        boş
+                                        bırakıldığında <strong>0'dan başlar</strong>.
+                                    </p>
+                                </div>
+                                <div class="slice-visual-combined">
+                                    <div class="slice-unit"><span class="box highlight selected">H</span><span
+                                            class="index selected">0</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">He</span><span
+                                            class="index selected">1</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">Li</span><span
+                                            class="index selected">2</span></div>
+                                    <div class="slice-unit"><span class="box">Be</span><span class="index">3</span>
+                                    </div>
+                                    <div class="slice-unit"><span class="box">B</span><span class="index">4</span></div>
+                                </div>
+                            </div>
+                            <!-- 3. Sondan -->
+                            <div class="slice-demo-box">
+                                <div class="slice-code-header">
+                                    <span class="badge" style="font-size: 0.7rem; background: var(--primary);">3.
+                                        Sondan</span>
+                                    <code>elementler[2:]</code>
+                                    <span class="slice-result">→ ["Li", "Be", "B"]</span>
+                                    <p style="font-size: 0.75rem; margin-top: 5px; color: var(--text-muted);">Bitiş boş
+                                        bırakıldığında <strong>sona kadar gider</strong>.
+                                    </p>
+                                </div>
+                                <div class="slice-visual-combined">
+                                    <div class="slice-unit"><span class="box">H</span><span class="index">0</span></div>
+                                    <div class="slice-unit"><span class="box">He</span><span class="index">1</span>
+                                    </div>
+                                    <div class="slice-unit"><span class="box highlight selected">Li</span><span
+                                            class="index selected">2</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">Be</span><span
+                                            class="index selected">3</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">B</span><span
+                                            class="index selected">4</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">14</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 5: ADIMLI VE TERS (SAYFA 14) -->
+            <div class="page" data-page="15">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 5</span>
+                        <h2>Adımlı ve Ters 🔄</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="slice-demo-section">
+                            <!-- 4. Adımlı -->
+                            <div class="slice-demo-box">
+                                <div class="slice-code-header">
+                                    <span class="badge" style="font-size: 0.7rem; background: var(--accent);">4.
+                                        Adımlı</span>
+                                    <code>elementler[::2]</code>
+                                    <span class="slice-result">→ ["H", "Li", "B"]</span>
+                                </div>
+                                <div class="slice-visual-combined">
+                                    <div class="slice-unit"><span class="box highlight selected">H</span><span
+                                            class="index selected">0</span></div>
+                                    <div class="slice-unit"><span class="box">He</span><span class="index">1</span>
+                                    </div>
+                                    <div class="slice-unit"><span class="box highlight selected">Li</span><span
+                                            class="index selected">2</span></div>
+                                    <div class="slice-unit"><span class="box">Be</span><span class="index">3</span>
+                                    </div>
+                                    <div class="slice-unit"><span class="box highlight selected">B</span><span
+                                            class="index selected">4</span></div>
+                                </div>
+                                <p style="font-size: 0.8rem; margin-top: 5px; color: var(--text-muted);">2'şer 2'şer
+                                    atlayarak alır!
+                                    (0, 2, 4...)</p>
+                            </div>
+
+                            <!-- 5. Ters -->
+                            <div class="slice-demo-box">
+                                <div class="slice-code-header">
+                                    <span class="badge" style="font-size: 0.7rem; background: var(--primary);">5.
+                                        Ters</span>
+                                    <code>elementler[::-1]</code>
+                                    <span class="slice-result">→ ["B", "Be", "Li", "He", "H"]</span>
+                                </div>
+                                <div class="slice-visual-combined"
+                                    style="flex-direction: row-reverse; justify-content: center;">
+                                    <div class="slice-unit"><span class="box highlight selected">H</span><span
+                                            class="index selected">0</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">He</span><span
+                                            class="index selected">1</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">Li</span><span
+                                            class="index selected">2</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">Be</span><span
+                                            class="index selected">3</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">B</span><span
+                                            class="index selected">4</span></div>
+                                </div>
+                                <p style="font-size: 0.8rem; margin-top: 5px; color: var(--text-muted);">Listeyi tamamen
+                                    tersine
+                                    çevirmenin en havalı yolu! 😎</p>
+                            </div>
+
+                            <!-- 6. Negatif -->
+                            <div class="slice-demo-box">
+                                <div class="slice-code-header">
+                                    <span class="badge" style="font-size: 0.7rem; background: var(--bg-light);">6.
+                                        Negatif</span>
+                                    <code>elementler[-2:]</code>
+                                    <span class="slice-result">→ ["Be", "B"]</span>
+                                </div>
+                                <div class="slice-visual-combined">
+                                    <div class="slice-unit"><span class="box">H</span><span class="index">0</span></div>
+                                    <div class="slice-unit"><span class="box">He</span><span class="index">1</span>
+                                    </div>
+                                    <div class="slice-unit"><span class="box">Li</span><span class="index">2</span>
+                                    </div>
+                                    <div class="slice-unit"><span class="box highlight selected">Be</span><span
+                                            class="index selected">-2</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">B</span><span
+                                            class="index selected">-1</span></div>
+                                </div>
+                                <p style="font-size: 0.8rem; margin-top: 5px; color: var(--text-muted);">Sondaki 2
+                                    elemanı al.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">15</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 5: GELİŞMİŞ TEKNİKLER (SAYFA 15) -->
+            <!-- BÖLÜM 5: İPUÇLARI (SAYFA 15) -->
+            <div class="page" data-page="16">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 5</span>
+                        <h2>İpuçları ve Teknikler 💡</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="advanced-slicing-examples">
+                            <!-- 7. Kopya -->
+                            <div class="slice-demo-box">
+                                <div class="slice-code-header">
+                                    <span class="badge" style="font-size: 0.7rem; background: var(--secondary);">7.
+                                        Kopya</span>
+                                    <code>elementler[:]</code>
+                                    <span class="slice-result">→ ["H", "He", "Li", "Be", "B"]</span>
+                                </div>
+                                <div class="slice-visual-combined">
+                                    <div class="slice-unit"><span class="box highlight selected">H</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">He</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">Li</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">Be</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">B</span></div>
+                                </div>
+                                <p style="font-size: 0.8rem; margin-top: 5px; color: var(--text-muted);">Listenin
+                                    tamamını kopyalar.
+                                </p>
+                            </div>
+
+                            <!-- 8. Sandviç -->
+                            <div class="slice-demo-box">
+                                <div class="slice-code-header">
+                                    <span class="badge" style="font-size: 0.7rem; background: var(--accent);">8.
+                                        Sandviç</span>
+                                    <code>elementler[1:-1]</code>
+                                    <span class="slice-result">→ ["He", "Li", "Be"]</span>
+                                </div>
+                                <div class="slice-visual-combined">
+                                    <div class="slice-unit"><span class="box">H</span><span class="index">0</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">He</span><span
+                                            class="index selected">1</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">Li</span><span
+                                            class="index selected">2</span></div>
+                                    <div class="slice-unit"><span class="box highlight selected">Be</span><span
+                                            class="index selected">3</span></div>
+                                    <div class="slice-unit"><span class="box">B</span><span class="index">4</span></div>
+                                </div>
+                                <p style="font-size: 0.8rem; margin-top: 5px; color: var(--text-muted);">Baştaki ve
+                                    sondaki
+                                    elemanları at, sadece ortayı al!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">16</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 5: GÖREV VE PRATİK 1 (SAYFA 16) -->
+            <div class="page" data-page="17">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 5</span>
+                        <h2>Görev ve Pratik 🧠</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="challenge-box">
+                            <div class="challenge-icon">🚀</div>
+                            <h3 class="challenge-title">GÖREV: Şifreyi Çöz!</h3>
+                            <p class="challenge-desc">Çıktıyı tahmin et:</p>
+                            <div class="challenge-code">
+                                <code
+                                    style="display: block; color: var(--accent-light); margin-bottom: 5px;">sifre = ["P", "Y", "T", "H", "O", "N"]</code>
+                                <code style="display: block; color: white;">print(sifre[1:5:2])</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">17</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÖLÜM 5: PRATİK 2 VE İPUCU (SAYFA 17) -->
+            <div class="page" data-page="18">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Bölüm 5</span>
+                        <h2>Pratik ve İpuçları 🚀</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="practice-header">
+                            <span style="font-size: 1.2rem;">✍️</span>
+                            <h3>Kendini Dene</h3>
+                        </div>
+
+                        <div class="practice-grid">
+                            <div class="practice-card">
+                                <div class="practice-question">
+                                    <span>Soru 1: Son 3 elemanı nasıl alırsın?</span>
+                                    <span class="reveal-text">(Göster)</span>
+                                </div>
+                                <div class="practice-answer">liste[-3:]</div>
+                            </div>
+
+                            <div class="practice-card">
+                                <div class="practice-question">
+                                    <span>Soru 2: İlk 2 eleman HARİÇ hepsi?</span>
+                                    <span class="reveal-text">(Göster)</span>
+                                </div>
+                                <div class="practice-answer">liste[2:]</div>
+                            </div>
+                        </div>
+
+                        <div class="practice-note" style="margin-top: 25px;">
+                            <span class="note-icon">📐</span>
+                            <div class="note-content">
+                                <h4>İpucu: Geometri</h4>
+                                <p>Bir çokgenin köşe açılarını tutuyorsan <code>acilar[::2]</code> ile her ikinci
+                                    açıyı alabilirsin!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">18</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUIZ PART 1 (YENİ KONUM) -->
+            <div class="page" data-page="19">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Pratik</span>
+                        <h2>Alıştırma: Bölüm 1 🧠</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="quiz-container">
+                            <div class="quiz-intro" style="margin-bottom: 15px;">
+                                <p>Konuyu ne kadar anladığını test edelim. (1/3)</p>
+                                <button class="start-quiz-btn" onclick="resetQuiz()">
+                                    <span class="btn-icon">🔄</span>
+                                    <span>Testi Yenile</span>
+                                </button>
+                            </div>
+
+                            <!-- Q1 -->
+                            <div class="quiz-question" data-question="1">
+                                <div class="question-header">
+                                    <span class="q-number">Soru 1</span>
+                                    <span class="q-difficulty easy">Kolay</span>
+                                </div>
+                                <p class="question-text"><code>liste = [2, 3, 5, 7]</code>. <code>len(liste)</code>
+                                    nedir?</p>
+                                <div class="quiz-options">
+                                    <button class="quiz-option" data-correct="false"
+                                        onclick="checkAnswer(this)">3</button>
+                                    <button class="quiz-option" data-correct="true"
+                                        onclick="checkAnswer(this)">4</button>
+                                    <button class="quiz-option" data-correct="false"
+                                        onclick="checkAnswer(this)">5</button>
+                                    <button class="quiz-option" data-correct="false"
+                                        onclick="checkAnswer(this)">6</button>
+                                </div>
+                                <div class="feedback"></div>
+                            </div>
+
+                            <!-- Q2 -->
+                            <div class="quiz-question" data-question="2">
+                                <div class="question-header">
+                                    <span class="q-number">Soru 2</span>
+                                    <span class="q-difficulty easy">Kolay</span>
+                                </div>
+                                <p class="question-text">Listenin <strong>en sonuna</strong> eleman eklemek için?</p>
+                                <div class="quiz-options">
+                                    <button class="quiz-option" data-correct="false"
+                                        onclick="checkAnswer(this)">insert()</button>
+                                    <button class="quiz-option" data-correct="true"
+                                        onclick="checkAnswer(this)">append()</button>
+                                    <button class="quiz-option" data-correct="false"
+                                        onclick="checkAnswer(this)">add()</button>
+                                    <button class="quiz-option" data-correct="false"
+                                        onclick="checkAnswer(this)">push()</button>
+                                </div>
+                                <div class="feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">19</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUIZ PART 2 (YENİ KONUM) -->
+            <div class="page" data-page="20">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Pratik</span>
+                        <h2>Alıştırma: Bölüm 2 🧠</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="quiz-container">
+                            <p
+                                style="margin-bottom: 10px; font-size: 0.9rem; color: var(--text-muted); text-align: center;">
+                                Soruların Devamı (2/3)</p>
+
+                            <!-- Q3 -->
+                            <div class="quiz-question" data-question="3">
+                                <div class="question-header">
+                                    <span class="q-number">Soru 3</span>
+                                    <span class="q-difficulty medium">Orta</span>
+                                </div>
+                                <p class="question-text"><code>s = [1, 1, 2, 3, 5, 8]</code>. <code>print(s[-2])</code>?
+                                </p>
+                                <div class="quiz-options">
+                                    <button class="quiz-option" data-correct="false"
+                                        onclick="checkAnswer(this)">8</button>
+                                    <button class="quiz-option" data-correct="true"
+                                        onclick="checkAnswer(this)">5</button>
+                                    <button class="quiz-option" data-correct="false"
+                                        onclick="checkAnswer(this)">3</button>
+                                    <button class="quiz-option" data-correct="false"
+                                        onclick="checkAnswer(this)">2</button>
+                                </div>
+                                <div class="feedback"></div>
+                            </div>
+
+                            <!-- Q4 -->
+                            <div class="quiz-question" data-question="4">
+                                <div class="question-header">
+                                    <span class="q-number">Soru 4</span>
+                                    <span class="q-difficulty medium">Orta</span>
+                                </div>
+                                <p class="question-text"><code>p = [10, 20, 30, 40, 50]</code>. <code>p[1:4]</code>
+                                    sonucu?</p>
+                                <div class="quiz-options">
+                                    <button class="quiz-option" data-correct="false" onclick="checkAnswer(this)">[10,
+                                        20,
+                                        30]</button>
+                                    <button class="quiz-option" data-correct="true" onclick="checkAnswer(this)">[20, 30,
+                                        40]</button>
+                                    <button class="quiz-option" data-correct="false" onclick="checkAnswer(this)">[10,
+                                        20, 30,
+                                        40]</button>
+                                    <button class="quiz-option" data-correct="false" onclick="checkAnswer(this)">[30,
+                                        40,
+                                        50]</button>
+                                </div>
+                                <div class="feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">20</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUIZ PART 3 (YENİ KONUM) -->
+            <div class="page" data-page="21">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Pratik</span>
+                        <h2>Alıştırma: Bölüm 3 🧠</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="quiz-container">
+                            <p
+                                style="margin-bottom: 10px; font-size: 0.9rem; color: var(--text-muted); text-align: center;">
+                                Son Sorular (3/3)</p>
+
+                            <!-- Q5 -->
+                            <div class="quiz-question" data-question="5">
+                                <div class="question-header">
+                                    <span class="q-number">Soru 5</span>
+                                    <span class="q-difficulty hard">Zor</span>
+                                </div>
+                                <p class="question-text"><code>[2, 4, 6]</code> → <code>pop()</code> →
+                                    <code>append(10)</code>?
+                                </p>
+                                <div class="quiz-options">
+                                    <button class="quiz-option" data-correct="true" onclick="checkAnswer(this)">[2, 4,
+                                        10]</button>
+                                    <button class="quiz-option" data-correct="false" onclick="checkAnswer(this)">[2, 4,
+                                        6,
+                                        10]</button>
+                                    <button class="quiz-option" data-correct="false" onclick="checkAnswer(this)">[2, 4,
+                                        10,
+                                        6]</button>
+                                    <button class="quiz-option" data-correct="false" onclick="checkAnswer(this)">[2,
+                                        4]</button>
+                                </div>
+                                <div class="feedback"></div>
+                            </div>
+
+                            <!-- Q6 -->
+                            <div class="quiz-question" data-question="6">
+                                <div class="question-header">
+                                    <span class="q-number">Soru 6</span>
+                                    <span class="q-difficulty hard">Zor</span>
+                                </div>
+                                <p class="question-text"><code>r = [1, 2, 3]</code>. <code>r[::-1]</code> çıktısı?</p>
+                                <div class="quiz-options">
+                                    <button class="quiz-option" data-correct="false" onclick="checkAnswer(this)">[1, 2,
+                                        3]</button>
+                                    <button class="quiz-option" data-correct="true" onclick="checkAnswer(this)">[3, 2,
+                                        1]</button>
+                                    <button class="quiz-option" data-correct="false"
+                                        onclick="checkAnswer(this)">Hata</button>
+                                    <button class="quiz-option" data-correct="false" onclick="checkAnswer(this)">[1,
+                                        2]</button>
+                                </div>
+                                <div class="feedback"></div>
+                            </div>
+
+                            <div class="quiz-score" id="quizScore">
+                                <div class="score-text">Skor: <span id="scoreValue">0</span>/6</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">21</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJE: GÖRSEL (SAYFA 22) -->
+            <div class="page" data-page="22">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Proje</span>
+                        <h2>Not Hesaplama: Görsel 📊</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="project-card">
+                            <p
+                                style="margin-bottom: 20px; color: var(--text-secondary); text-align: center; font-size: 0.9rem;">
+                                Senaryo: Öğrencinin en düşük notunu silip ortalamasını hesaplıyoruz.
+                            </p>
+
+                            <div class="project-walkthrough" style="display: flex; flex-direction: column; gap: 10px;">
+                                <!-- Step 1 -->
+                                <div class="walkthrough-step" style="padding: 12px;">
+                                    <div class="step-info" style="margin-bottom: 8px;">
+                                        <div class="step-badge">1</div>
+                                        <span>Notlar Tanımlandı</span>
+                                    </div>
+                                    <div class="step-visual" style="justify-content: center; gap: 5px;">
+                                        <span class="box" style="width: 40px; height: 40px; font-size: 1rem;">50</span>
+                                        <span class="box" style="width: 40px; height: 40px; font-size: 1rem;">80</span>
+                                        <span class="box" style="width: 40px; height: 40px; font-size: 1rem;">70</span>
+                                    </div>
+                                </div>
+
+                                <!-- Step 2 with sort inside -->
+                                <div class="walkthrough-step" style="padding: 12px;">
+                                    <div class="step-info" style="margin-bottom: 8px;">
+                                        <div class="step-badge">2</div>
+                                        <span>Sıralandı</span>
+                                        <code
+                                            style="margin-left: auto; background: rgba(99, 102, 241, 0.2); padding: 3px 10px; border-radius: 15px; font-size: 0.75rem;">notlar.sort()</code>
+                                    </div>
+                                    <div class="step-visual" style="justify-content: center; gap: 5px;">
+                                        <span class="box" style="width: 40px; height: 40px; font-size: 1rem;">50</span>
+                                        <span class="box" style="width: 40px; height: 40px; font-size: 1rem;">70</span>
+                                        <span class="box" style="width: 40px; height: 40px; font-size: 1rem;">80</span>
+                                    </div>
+                                </div>
+
+                                <!-- Step 3 with pop inside -->
+                                <div class="walkthrough-step" style="padding: 12px;">
+                                    <div class="step-info" style="margin-bottom: 8px;">
+                                        <div class="step-badge">3</div>
+                                        <span>En Düşük Silindi</span>
+                                        <code
+                                            style="margin-left: auto; background: rgba(249, 115, 22, 0.2); padding: 3px 10px; border-radius: 15px; font-size: 0.75rem;">notlar.pop(0)</code>
+                                    </div>
+                                    <div class="step-visual" style="justify-content: center; gap: 5px;">
+                                        <span class="box"
+                                            style="width: 40px; height: 40px; font-size: 1rem; opacity: 0.3; text-decoration: line-through;">50</span>
+                                        <span class="box" style="width: 40px; height: 40px; font-size: 1rem;">70</span>
+                                        <span class="box" style="width: 40px; height: 40px; font-size: 1rem;">80</span>
+                                    </div>
+                                </div>
+
+                                <!-- Result -->
+                                <div class="result-box" style="margin-top: 10px; padding: 12px;">
+                                    <span class="result-label">Ortalama:</span>
+                                    <span class="result-val">75.0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">22</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJE: KOD (SAYFA 23) -->
+            <div class="page" data-page="23">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Proje</span>
+                        <h2>Not Hesaplama: Kod 💻</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="project-card">
+                            <div class="project-header">
+                                <div class="project-icon">📝</div>
+                                <div class="project-title">
+                                    <h3>Kodlama Zamanı</h3>
+                                    <p>İşlemi Python koduna dökelim.</p>
+                                </div>
+                            </div>
+
+                            <div class="code-solution" style="margin-top: 20px;">
+                                <h4 style="color: var(--primary-light); margin-bottom: 15px; font-size: 0.9rem;">Çözüm
+                                    Kodu:</h4>
+                                <pre><code class="python">notlar = [50, 80, 70]
+
+# 1. Sırala
+notlar.sort()      # [50, 70, 80]
+
+# 2. En küçüğü sil
+notlar.pop(0)      # [70, 80]
+
+# 3. Ortalamayı bul
+toplam = sum(notlar)
+adet = len(notlar)
+ort = toplam / adet
+
+print(ort)         # 75.0</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">23</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ÖDEV (SAYFA 24) -->
+            <div class="page" data-page="24">
+                <div class="page-content">
+                    <div class="page-header">
+                        <span class="chapter-badge">Ödev</span>
+                        <h2>Sıra Sende! 🫵</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="homework-box">
+                            <div class="homework-title">🎯 Görev 1: Alışveriş Listesi</div>
+                            <p style="margin-bottom: 20px;">Python ile kendi akıllı alışveriş listeni oluşturmanı
+                                istiyoruz.</p>
+
+                            <ul
+                                style="list-style-type: disc; padding-left: 20px; line-height: 1.8; color: var(--text-secondary);">
+                                <li><strong>Adım 1:</strong> <code>market</code> adında, içinde "Ekmek" ve "Süt" olan
+                                    bir liste oluştur.</li>
+                                <li><strong>Adım 2:</strong> Listeye "Yumurta" ekle.</li>
+                                <li><strong>Adım 3:</strong> Listenin başına "Elma" ekle.</li>
+                                <li><strong>Adım 4:</strong> "Süt"ü listeden sil.</li>
+                                <li><strong>Adım 5:</strong> Listeyi alfabetik sırala.</li>
+                            </ul>
+                        </div>
+
+                        <div class="homework-box" style="background: rgba(99, 102, 241, 0.1); border-color: #6366f1;">
+                            <div class="homework-title" style="color: #818cf8;">🚀 Görev 2: Sayı Filtreleme</div>
+                            <p style="margin-bottom: 20px;">Listeleri ve <code>if</code> yapısını birlikte kullanalım:
+                            </p>
+
+                            <ul
+                                style="list-style-type: disc; padding-left: 20px; line-height: 1.8; color: var(--text-secondary);">
+                                <li><strong>Adım 1:</strong> <code>tam_sayilar</code> adında 1'den 10'a kadar sayıların
+                                    olduğu bir liste oluştur.</li>
+                                <li><strong>Adım 2:</strong> <code>ucun_kati</code> adında <strong>boş bir
+                                        liste</strong> oluştur.</li>
+                                <li><strong>Adım 3:</strong> Bir döngü veya kontrol ile <code>tam_sayilar</code>
+                                    içindeki <strong>3'e tam bölünen</strong> sayıları bul.</li>
+                                <li><strong>Adım 4:</strong> Bu sayıları <code>append()</code> ile
+                                    <code>ucun_kati</code> listesine ekle.
+                                </li>
+                                <li><strong>Adım 5:</strong> Sonucu ekrana yazdır.</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-note" style="margin-top: 20px;">
+                            <span class="note-icon">🚀</span>
+                            <p>Bu ödevi yaparken <strong>tüm liste metodlarını</strong> (append, insert, remove, sort)
+                                kullanmış
+                                olacaksın!</p>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">24</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- SON SAYFA (SAYFA 25) -->
+            <div class="page end-page" data-page="25">
+                <div class="page-content">
+                    <div class="end-content">
+                        <div class="celebration">🎉</div>
+                        <h2>Tebrikler!</h2>
+                        <p>Python Listeler modülünü tamamladın!</p>
+
+                        <div class="summary-card">
+                            <h3>📚 Öğrendiklerin:</h3>
+                            <ul>
+                                <li>✅ Liste kavramı ve özellikleri</li>
+                                <li>✅ Liste oluşturma yöntemleri</li>
+                                <li>✅ İndeksleme ve negatif indeksleme</li>
+                                <li>✅ Ekleme ve silme metodları</li>
+                                <li>✅ Dilim alma ve diğer metodlar</li>
+                                <li>✅ Proje: Not hesaplama</li>
+                            </ul>
+                        </div>
+
+                        <button class="restart-btn" onclick="goToPage(0)">
+                            <span>Başa Dön</span>
+                        </button>
+                    </div>
+
+                    <div class="page-footer">
+                        <span class="page-number">25</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigasyon Kontrolleri -->
+        <div class="nav-controls">
+            <button class="nav-btn prev" id="prevBtn" onclick="prevPage()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+            <div class="page-indicator">
+                <span id="currentPage">1</span> / <span id="totalPages">25</span>
+            </div>
+            <button class="nav-btn next" id="nextBtn" onclick="nextPage()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
