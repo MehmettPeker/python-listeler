@@ -482,6 +482,16 @@ body {
     letter-spacing: 1px;
 }
 
+.cover-dedication {
+    margin-top: 10px;
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+    text-align: center;
+    max-width: 360px;
+    opacity: 0.95;
+}
+
 /* ===================================
    SAYFA BAŞLIĞI
    =================================== */
@@ -1702,6 +1712,19 @@ code {
 .end-content>p {
     color: var(--text-secondary);
     margin-bottom: 30px;
+}
+
+.end-dedication {
+    margin: 4px auto 20px;
+    max-width: 430px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(129, 140, 248, 0.35);
+    background: rgba(99, 102, 241, 0.08);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: center;
 }
 
 .summary-card {
@@ -3653,6 +3676,18 @@ code {
 @media (max-width: 480px) {
     .page-content {
         padding: 16px 12px 84px 12px !important;
+    }
+
+    .cover-dedication {
+        margin-top: 8px;
+        font-size: 0.8rem;
+        max-width: 300px;
+    }
+
+    .end-dedication {
+        margin-bottom: 16px;
+        padding: 8px 10px;
+        font-size: 0.82rem;
     }
 
     .page-header h2 {
