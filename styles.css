@@ -1822,6 +1822,10 @@ code {
     gap: 30px;
 }
 
+body.cover-active .nav-controls {
+    display: none !important;
+}
+
 .nav-btn {
     width: 50px;
     height: 50px;
