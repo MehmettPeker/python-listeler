@@ -3520,3 +3520,98 @@ code {
         max-width: 600px !important;
     }
 }
+
+@media (max-width: 768px) {
+    :root {
+        --book-width: 100% !important;
+        --book-height: auto !important;
+        --max-book-width: 100% !important;
+        --max-book-height: none !important;
+    }
+
+    body {
+        padding: 10px;
+        align-items: flex-start;
+    }
+
+    .book-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto 86px auto !important;
+    }
+
+    .book {
+        width: 100% !important;
+        height: auto !important;
+        min-height: calc(100svh - 20px) !important;
+        max-height: none !important;
+    }
+
+    .page {
+        position: relative !important;
+        height: auto !important;
+        min-height: calc(100svh - 120px) !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .page-content {
+        height: auto !important;
+        max-height: none !important;
+        min-height: 0 !important;
+        padding: 18px 16px 86px 16px !important;
+        overflow-y: visible !important;
+    }
+
+    .content-section {
+        overflow-y: visible !important;
+        min-height: 0 !important;
+        padding-right: 0 !important;
+        padding-bottom: 16px !important;
+    }
+
+    .page-footer {
+        position: static !important;
+        margin-top: 12px !important;
+        padding-bottom: 8px !important;
+    }
+
+    .nav-controls {
+        position: fixed !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 10px) !important;
+        width: calc(100% - 24px) !important;
+        max-width: 360px !important;
+        z-index: 99999 !important;
+    }
+
+    pre,
+    .code-block pre,
+    .feature-card pre,
+    .method-body pre {
+        font-size: 0.78rem !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-content {
+        padding: 16px 12px 84px 12px !important;
+    }
+
+    .page-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .title-lists {
+        letter-spacing: 2px;
+    }
+
+    .nav-controls {
+        width: calc(100% - 16px) !important;
+        padding: 8px 14px !important;
+    }
+}
