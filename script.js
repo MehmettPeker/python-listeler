@@ -102,6 +102,9 @@ function updateNavigation() {
     prevBtn.disabled = currentPageIndex === 0;
     nextBtn.disabled = currentPageIndex === totalPages - 1;
 
+    // Kapak sayfasında alt navigasyonu gizle
+    document.body.classList.toggle('cover-active', currentPageIndex === 0);
+
     // Sayfa numarası (kapak sayfası 0, diğerleri 1'den başlar)
     currentPageEl.textContent = currentPageIndex;
 }
